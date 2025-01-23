@@ -1,0 +1,55 @@
+{
+    "name": "web_app",
+    "description": "Web app",
+    "author": {
+        "name": "Santiago Hyun",
+        "email": "santiagodorado@unicauca.edu.co",
+        "url": "https://sahydo.com"
+    },
+    "keywords": [],
+    "version": "1.0.1",
+    "private": true,
+    "license": "UNLICENSED",
+    "dependencies": {
+        "@emotion/react": "^11.4.1",
+        "@emotion/server": "^11.4.0",
+        "@emotion/styled": "^11.3.0",
+        "@faker-js/faker": "^8.1.0",
+        "@mercadopago/sdk-react": "^0.0.21",
+        "@mui/icons-material": "5.15.3",
+        "@mui/material": "5.15.3",
+        "@next/bundle-analyzer": "^12.2.0",
+        "@types/lodash": "^4.17.13",
+        "dayjs": "^1.11.6",
+        "i18next": "^23.7.16",
+        "lodash": "^4.17.21",
+        "next": "^15.0.3",
+        "next-i18next": "^15.2.0",
+        "next-pwa": "^5.6.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-i18next": "^14.0.0",
+        "react-markdown": "^8.0.3",
+        "react-number-format": "^5.4.2",
+        "sharp": "^0.33.2"
+    },
+    "scripts": {
+        "dev": "next",
+        "build": "next build",
+        "start": "next start",
+        "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest",
+        "cypress": "cypress open"
+    },
+    "devDependencies": {
+        "@emotion/eslint-plugin": "^11.11.0",
+        "@types/react": "17.0.24",
+        "@typescript-eslint/eslint-plugin": "^6.17.0",
+        "@typescript-eslint/parser": "^6.17.0",
+        "cypress": "^12.6.0",
+        "eslint": "^8.56.0",
+        "eslint-config-next": "^13",
+        "eslint-config-prettier": "^9.1.0",
+        "prettier": "^3.1.1",
+        "typescript": "5.3.3"
+    }
+}

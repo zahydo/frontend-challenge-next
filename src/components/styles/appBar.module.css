@@ -1,0 +1,15 @@
+.bannerImage {
+  width: 120px;
+  height: auto;
+  margin-right: 1%;
+  cursor: pointer;
+}
+
+.menu_container > a {
+    text-decoration: none;
+}
+
+.current_page {
+    font-weight: bold;
+    text-decoration: underline !important;
+}

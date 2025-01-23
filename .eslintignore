@@ -1,0 +1,7 @@
+pages/_app.tsx
+pages/_document.tsx
+next-i18next.config.js
+next.config.js
+.next/
+commons.js
+amplify-codegen-temp/models/models
