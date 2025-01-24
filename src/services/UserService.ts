@@ -1,4 +1,4 @@
-import { UserSearchParams, UserType } from "../interfaces/types";
+import { UserSearchParams, User } from "../interfaces/types";
 
 class UserServiceClient {
     private static instance: UserServiceClient;
@@ -13,7 +13,7 @@ class UserServiceClient {
         return UserServiceClient.instance;
     }
 
-    public async getUsers(params?: UserSearchParams): Promise<UserType[]> {
+    public async getUsers(params?: UserSearchParams): Promise<User[]> {
         const url = new URL(this.API_URL);
         if (params) {
             Object.keys(params).forEach(key => {
@@ -26,7 +26,7 @@ class UserServiceClient {
         return fetch(url).then((response) => response.json());
     }
 
-    public async createUser(user: UserType): Promise<UserType> {
+    public async createUser(user: User): Promise<User> {
         return fetch(this.API_URL, {
             method: "POST",
             headers: {
@@ -36,7 +36,7 @@ class UserServiceClient {
         }).then((response) => response.json());
     }
 
-    public async updateUser(user: UserType): Promise<UserType> {
+    public async updateUser(user: User): Promise<User> {
         return fetch(`${this.API_URL}/${user.id}`, {
             method: "PUT",
             headers: {
@@ -50,6 +50,10 @@ class UserServiceClient {
         return fetch(`${this.API_URL}/${id}`, {
             method: "DELETE",
         }).then((response) => response.json());
+    }
+
+    public async getUser(id: string): Promise<User> {
+        return fetch(`${this.API_URL}/${id}`).then((response) => response.json());
     }
 };
 

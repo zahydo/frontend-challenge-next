@@ -13,18 +13,21 @@ import {
     TextField,
     Typography
 } from "@mui/material";
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 import React, { useCallback, useEffect, useState } from "react";
-import { UserType } from "../../interfaces/types";
+import { User } from "../../interfaces/types";
 import UpsertDialog from "./UpsertDialog";
 import UserServiceClient from "../../services/UserService";
+import { useRouter } from "next/router";
 
-const DEFAULT_NEW_USER: UserType = { email: "", name: "", role: "USER", id: undefined };
+const DEFAULT_NEW_USER: User = { email: "", name: "", role: "USER", id: undefined };
 
 
 const UsersManagement = () => {
-    const [users, setUsers] = useState<UserType[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
+    const router = useRouter();
     const [searchTerm, setSearchTerm] = useState("");
-    const [newUser, setNewUser] = useState<UserType>(DEFAULT_NEW_USER);
+    const [newUser, setNewUser] = useState<User>(DEFAULT_NEW_USER);
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
     const [openUpsertDialog, setOpenUpsertDialog] = useState(false);
@@ -40,6 +43,7 @@ const UsersManagement = () => {
             const serviceInstance = UserServiceClient.getInstance();
             const data = await serviceInstance.getUsers({ search: searchTerm || undefined });
             setUsers(data);
+            console.log(data)
             setEditingIndex(null);
             setNewUser(DEFAULT_NEW_USER);
             setOpenUpsertDialog(false);
@@ -84,7 +88,7 @@ const UsersManagement = () => {
         await fetchUsers();
     }
 
-    const generatePDF = (user: UserType) => {
+    const generatePDF = (user: User) => {
         console.log(user)
     };
 
@@ -96,6 +100,10 @@ const UsersManagement = () => {
     const handleSearchChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
         await fetchUsers();
+    }
+
+    const handleAnalytics = (user: User) => {
+        router.push(`/analytics/${user.id}`)
     }
 
     return (
@@ -126,6 +134,8 @@ const UsersManagement = () => {
                             <TableCell>Email</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Role</TableCell>
+                            <TableCell>Total Logins</TableCell>
+                            <TableCell>Total Downloads</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableRow>
                     </TableHead>
@@ -135,12 +145,17 @@ const UsersManagement = () => {
                                 <TableCell>{user.email}</TableCell>
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.role}</TableCell>
+                                <TableCell>{user.activities?.filter(activity => activity.type === "LOGIN").length}</TableCell>
+                                <TableCell>{user.activities?.filter(activity => activity.type === "PDF_DOWNLOAD").length}</TableCell>
                                 <TableCell>
                                     <IconButton color="primary" onClick={() => editUser(index)}>
                                         <Edit />
                                     </IconButton>
                                     <IconButton color="error" onClick={() => deleteUser(index)}>
                                         <Delete />
+                                    </IconButton>
+                                    <IconButton color="default" onClick={() => handleAnalytics(user)}>
+                                        <AnalyticsIcon />
                                     </IconButton>
                                     <IconButton color="default" onClick={() => generatePDF(user)}>
                                         <Download />

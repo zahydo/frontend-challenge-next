@@ -1,16 +1,20 @@
-export interface UserType {
+export interface User {
     id?: string;
     email: string;
     name: string;
     role: "ADMIN" | "USER";
     createdAt?: string;
     updatedAt?: string;
+    activities?: Activity[];
+    reports?: FileType[];
 }
 
-export interface ActivityType {
+type ActivityType = "LOGIN" | "PDF_DOWNLOAD";
+
+export interface Activity {
     id?: string;
     title: string;
-    type: string;
+    type: ActivityType;
     userId: string;
     timestamp?: string;
     details?: string;

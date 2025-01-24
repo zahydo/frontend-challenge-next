@@ -2,12 +2,14 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { SSRConfig } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
+import HomeComponent from "../src/components/home/HomeComponent";
+import RootLayout from "../src/components/layout/RootLayout";
 
 export default function Home(): React.ReactElement {
     return (
-        <div>
-            <h1>Home</h1>
-        </div>
+        <RootLayout>
+            <HomeComponent />
+        </RootLayout>
     );
 }
 
