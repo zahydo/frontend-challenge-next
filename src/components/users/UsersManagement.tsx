@@ -89,7 +89,20 @@ const UsersManagement = () => {
     }
 
     const generatePDF = (user: User) => {
-        console.log(user)
+        // open a new tab with the PDF url
+        UserServiceClient.getInstance().generatePDF(user).then((response) => {
+            // Crear un enlace temporal con el atributo `download`
+            const link = document.createElement('a');
+            link.href = response.url;
+            link.download = `UserReport-${user.id}-${user.email}.pdf`;
+            document.body.appendChild(link);
+
+            // Simular el clic en el enlace
+            link.click();
+
+            // Eliminar el enlace del DOM
+            document.body.removeChild(link);
+        });
     };
 
     const handleOpenUpsertDialog = () => {

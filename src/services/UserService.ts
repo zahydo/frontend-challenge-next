@@ -55,6 +55,10 @@ class UserServiceClient {
     public async getUser(id: string): Promise<User> {
         return fetch(`${this.API_URL}/${id}`).then((response) => response.json());
     }
+
+    public async generatePDF(user: User): Promise<{ message: string, url: string }> {
+        return fetch(`${this.API_URL}/${user.id}/report`).then((response) => response.json());
+    }
 };
 
 export default UserServiceClient;
