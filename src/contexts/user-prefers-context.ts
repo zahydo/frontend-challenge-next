@@ -23,7 +23,6 @@ interface Prefers {
 
 export const PrefersContext = createContext<Prefers>({
   themeType: 'dark',
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   switchTheme: () => {}
 });
 
@@ -33,11 +32,7 @@ export const usePrefers = (): Prefers => useContext(PrefersContext);
 export const getTheme = (themeType: PaletteMode, locale:  string): Theme => {
     const theme: Theme = createTheme({
         palette: {
-            mode: themeType,
-            primary: {
-                main: '#FDD835',
-                contrastText: '#000000'
-            },
+            mode: themeType
         },
         typography: {
             fontFamily: 'Quicksand',
