@@ -43,7 +43,6 @@ const UsersManagement = () => {
             const serviceInstance = UserServiceClient.getInstance();
             const data = await serviceInstance.getUsers({ search: searchTerm || undefined });
             setUsers(data);
-            console.log(data)
             setEditingIndex(null);
             setNewUser(DEFAULT_NEW_USER);
             setOpenUpsertDialog(false);
@@ -69,8 +68,6 @@ const UsersManagement = () => {
     };
 
     const editUser = (index: number) => {
-        console.log(index)
-        console.log(users)
         setNewUser(users[index]);
         setEditingIndex(index);
         setOpenUpsertDialog(true);
