@@ -14,7 +14,7 @@ import { Activity, User } from "../../src/interfaces/types";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import UserServiceClient from "../../src/services/UserService";
-import { SSRConfig } from "next-i18next";
+import { SSRConfig, useTranslation } from "next-i18next";
 import RootLayout from "../../src/components/layout/RootLayout";
 
 type AnalyticsProps = SSRConfig & {
@@ -22,41 +22,42 @@ type AnalyticsProps = SSRConfig & {
 }
 
 const Analytics: React.FC<AnalyticsProps> = ({ user }) => {
+    const { t } = useTranslation("index");
     return (
         <RootLayout>
             <Box sx={{ padding: 4 }}>
                 <Typography variant="h4" gutterBottom>
-                    User Analytics
+                    {t("User Analytics")}
                 </Typography>
 
-                <Typography variant="h4" component="h2">Profile</Typography>
+                <Typography variant="h4" component="h2">{t("Profile")}</Typography>
                 <TableContainer component={Paper} sx={{ marginBottom: 4 }}>
                     <Table>
                         <TableBody>
                             <TableRow>
-                                <TableCell>Name</TableCell>
+                                <TableCell>{t("Name")}</TableCell>
                                 <TableCell>{user?.name}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Email</TableCell>
+                                <TableCell>{t("Email")}</TableCell>
                                 <TableCell>{user?.email}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Role</TableCell>
+                                <TableCell>{t("Role")}</TableCell>
                                 <TableCell>{user?.role}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
 
-                <Typography variant="h4" component="h2">Activities</Typography>
+                <Typography variant="h4" component="h2">{t("Activities")}</Typography>
                 <TableContainer component={Paper} sx={{ marginBottom: 4 }}>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Activity</TableCell>
-                                <TableCell>Time</TableCell>
-                                <TableCell>Details</TableCell>
+                                <TableCell>{t("Activity")}</TableCell>
+                                <TableCell>{t("Time")}</TableCell>
+                                <TableCell>{t("Details")}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

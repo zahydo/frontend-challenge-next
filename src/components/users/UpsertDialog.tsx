@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import React from "react";
 import { User } from "../../interfaces/types";
+import { useTranslation } from "next-i18next";
 
 interface UpsertDialogProps {
     open: boolean;
@@ -12,6 +13,7 @@ interface UpsertDialogProps {
 
 export default function UpsertDialog(props: UpsertDialogProps): React.ReactElement {
     const { open, onClose, user, handleChanges, handleSave } = props;
+    const { t } = useTranslation("index");
 
     const handleChangeRole = (event: SelectChangeEvent<"ADMIN" | "USER">) => {
         const value = event.target.value;
@@ -31,12 +33,12 @@ export default function UpsertDialog(props: UpsertDialogProps): React.ReactEleme
     return (
         <Dialog open={open} onClose={onClose}>
             <form onSubmit={onSubmit}>
-                <DialogTitle>{user.id ? "Edit" : "Add"} User</DialogTitle>
+                <DialogTitle>{t(`${user.id ? "Edit User" : "Add User"}`)}</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
                         margin="dense"
-                        label="Name"
+                        label={t("Name")}
                         name="name"
                         type="text"
                         fullWidth
@@ -46,7 +48,7 @@ export default function UpsertDialog(props: UpsertDialogProps): React.ReactEleme
                     />
                     <TextField
                         margin="dense"
-                        label="Email"
+                        label={t("Email")}
                         name="email"
                         type="email"
                         fullWidth
@@ -61,11 +63,11 @@ export default function UpsertDialog(props: UpsertDialogProps): React.ReactEleme
                             labelId="user-role-label"
                             id="user-role"
                             value={user.role}
-                            label="Role"
+                            label={t("Role")}
                             onChange={handleChangeRole}
                         >
-                            <MenuItem value={"ADMIN"}>Admin</MenuItem>
-                            <MenuItem value={"USER"}>User</MenuItem>
+                            <MenuItem value={"ADMIN"}>{t("Admin")}</MenuItem>
+                            <MenuItem value={"USER"}>{t("User")}</MenuItem>
                         </Select>
                     </FormControl>
                 </DialogContent>

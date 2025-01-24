@@ -19,6 +19,7 @@ import { User } from "../../interfaces/types";
 import UpsertDialog from "./UpsertDialog";
 import UserServiceClient from "../../services/UserService";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const DEFAULT_NEW_USER: User = { email: "", name: "", role: "USER", id: undefined };
 
@@ -29,6 +30,7 @@ const UsersManagement = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [newUser, setNewUser] = useState<User>(DEFAULT_NEW_USER);
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
+    const { t } = useTranslation("index");
 
     const [openUpsertDialog, setOpenUpsertDialog] = useState(false);
 
@@ -74,7 +76,7 @@ const UsersManagement = () => {
     };
 
     const deleteUser = (index: number) => {
-        const response = confirm(`Are you sure you want to delete the user ${users[index].name}?`);
+        const response = confirm(`${("Are you sure you want to delete the user?")}: ${users[index]?.email}`);
         if (response) {
             handleConfirmDelete(index);
         }
@@ -118,18 +120,18 @@ const UsersManagement = () => {
 
     return (
         <Container>
-            <Typography variant="h3" component="h1">User Management</Typography>
+            <Typography variant="h3" component="h1">{t("User Management")}</Typography>
             <Button
                 variant="contained"
                 color="primary"
                 startIcon={<Add />}
                 onClick={handleOpenUpsertDialog}
             >
-                Add User
+                {t("Add User")}
             </Button>
 
             <TextField
-                label="Search Users by Name or Email"
+                label={t("Search Users by Name or Email")}
                 variant="outlined"
                 fullWidth
                 margin="normal"
@@ -141,12 +143,12 @@ const UsersManagement = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Email</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Role</TableCell>
-                            <TableCell>Total Logins</TableCell>
-                            <TableCell>Total Downloads</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell>{t("Email")}</TableCell>
+                            <TableCell>{t("Name")}</TableCell>
+                            <TableCell>{t("Role")}</TableCell>
+                            <TableCell>{t("Total Logins")}</TableCell>
+                            <TableCell>{t("Total Downloads")}</TableCell>
+                            <TableCell>{t("Actions")}</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
