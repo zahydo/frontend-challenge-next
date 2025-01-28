@@ -67,6 +67,7 @@ const UsersManagement = () => {
         await fetchUsers();
         setNewUser(DEFAULT_NEW_USER);
         setOpenUpsertDialog(false);
+        setEditingIndex(null);
     };
 
     const editUser = (index: number) => {
